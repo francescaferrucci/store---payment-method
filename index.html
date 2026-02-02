@@ -240,32 +240,7 @@
         .option-button i {
             color: var(--hannah-secondary);
         }
-        /* Pet Selection */
-        .pet-selection {
-            margin-top: 8px;
-            padding-top: 16px;
-            border-top: 1px solid #e1e8f0;
-        }
-        .pet-selection label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        .pet-select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 2px solid #e1e8f0;
-            border-radius: 8px;
-            font-size: 14px;
-            background: white;
-            transition: all 0.3s ease;
-        }
-        .pet-select:focus {
-            outline: none;
-            border-color: var(--hannah-primary);
-            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+
         }
         /* Comments */
         .comments-section textarea {
@@ -278,17 +253,6 @@
             transition: all 0.3s ease;
             min-height: 90px;
             resize: vertical;
-        }
-        /* PIN Section */
-        .pin-section {
-            margin-top: 10px;
-        }
-        .pin-section input {
-            letter-spacing: 6px;
-            font-family: monospace;
-            font-size: 20px;
-            text-align: center;
-            font-weight: 600;
         }
         /* Bank Info Section */
         .bank-info-section {
@@ -547,24 +511,7 @@
                             <i class="fas fa-user-md"></i>
                             Member (Francesca)
                         </div>
-                        <div class="option-button" onclick="selectPaymentFor('pet')">
-                            <i class="fas fa-paw"></i>
-                            Pet
-                        </div>
                     </div>
-                    
-                    <!-- Pet Selection (Only shows when pet is selected) -->
-                    <div class="pet-selection" id="petSelection" style="display: none;">
-                        <label>Select Pet:</label>
-                        <select class="pet-select" id="petSelect">
-                            <option value="">Select a pet</option>
-                            <option value="charlotte">Charlotte "Charlee"</option>
-                            <option value="carlotta">Carlotta</option>
-                            <option value="teddy">Teddy</option>
-                            <option value="new-puppy">New Puppy</option>
-                        </select>
-                    </div>
-                </div>
 
                 <!-- One Time / Recurring -->
                 <div class="section-card">
@@ -586,21 +533,6 @@
                     <label><i class="fas fa-comment-dots"></i> Comments/Detail:</label>
                     <textarea placeholder="Add any notes or details about this payment method..."></textarea>
                 </div>
-
-                <!-- Security PIN -->
-                <div class="form-group pin-section">
-                    <label><i class="fas fa-shield-alt"></i> Security PIN</label>
-                    <input type="password" placeholder="Enter your 4-6 digit PIN" maxlength="6">
-                    <div class="input-hint">Required for verification when using this payment method</div>
-                </div>
-
-                <!-- Security Note -->
-                <div class="security-note">
-                    <i class="fas fa-lock"></i>
-                    <div>
-                        <strong>Security Guarantee:</strong> All payment information is encrypted and stored securely. 
-                        We never store your full PIN on our servers.
-                    </div>
                 </div>
             </div>
         </div>
