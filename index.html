@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store New Card - Hannah Pet Hospital</title>
+    <title>Store Payment Method - Hannah Pet Hospital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -13,281 +13,391 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         body {
-            background-color: #f8fafc;
-            color: #334155;
+            background-color: #f5f8fa;
+            color: #2c3e50;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
+        /* Hannah Brand Colors */
+        :root {
+            --hannah-primary: #2c5aa0;    /* Deep blue */
+            --hannah-secondary: #34a0a4;  /* Teal */
+            --hannah-accent: #ff914d;     /* Orange */
+            --hannah-light: #f0f7ff;      /* Light blue */
+            --hannah-gray: #6c757d;       /* Medium gray */
+            --hannah-success: #28a745;    /* Green */
+        }
+        
         /* Modal Container */
         .modal-container {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 8px 30px rgba(44, 90, 160, 0.15);
             width: 100%;
-            max-width: 480px;
+            max-width: 520px;
             overflow: hidden;
+            border: 1px solid #e1e8f0;
         }
-        /* Modal Header - Simple */
+        /* Modal Header */
         .modal-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #e2e8f0;
-            background: white;
+            padding: 22px 28px;
+            border-bottom: 1px solid #e1e8f0;
+            background: linear-gradient(135deg, var(--hannah-primary) 0%, #3a6fc5 100%);
+            color: white;
         }
         .modal-header h1 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
-            color: #0f172a;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .modal-header h1 i {
-            color: #3b82f6;
+            background: rgba(255, 255, 255, 0.2);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Payment Type Tabs */
+        .payment-type-tabs {
+            display: flex;
+            gap: 4px;
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .payment-tab {
+            flex: 1;
+            padding: 10px 16px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .payment-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .payment-tab.active {
+            background: white;
+            color: var(--hannah-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         /* Modal Content */
         .modal-content {
-            padding: 24px;
+            padding: 28px;
         }
         /* Form Layout */
         .form-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 22px;
         }
         /* Form Group */
         .form-group {
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-size: 14px;
-            font-weight: 500;
-            color: #334155;
+            font-weight: 600;
+            color: #2c3e50;
         }
         .form-group label.required::after {
             content: " *";
-            color: #ef4444;
+            color: #e74c3c;
         }
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            padding: 12px 14px;
+            border: 2px solid #e1e8f0;
+            border-radius: 8px;
             font-size: 14px;
             background: white;
-            transition: border-color 0.2s;
+            transition: all 0.3s ease;
         }
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+            border-color: var(--hannah-primary);
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
         }
         .form-group .input-hint {
             font-size: 12px;
-            color: #64748b;
-            margin-top: 4px;
+            color: var(--hannah-gray);
+            margin-top: 6px;
         }
         /* Row Layouts */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 18px;
         }
         .form-row-3 {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            gap: 12px;
+            gap: 14px;
         }
         .form-row-address {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 12px;
+            gap: 14px;
         }
-        /* Card Method Options */
+        /* Method Options */
         .method-options {
             display: flex;
             gap: 12px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .method-option {
             flex: 1;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            padding: 14px;
+            border: 2px solid #e1e8f0;
+            border-radius: 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             background: white;
             font-size: 14px;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         .method-option:hover {
-            border-color: #3b82f6;
-            background: #f8fafc;
+            border-color: var(--hannah-primary);
+            background: var(--hannah-light);
         }
         .method-option.active {
-            border-color: #3b82f6;
-            background: #eff6ff;
-            color: #3b82f6;
+            border-color: var(--hannah-primary);
+            background: var(--hannah-light);
+            color: var(--hannah-primary);
+            box-shadow: 0 2px 8px rgba(44, 90, 160, 0.1);
         }
-        /* Payment Method For */
-        .payment-for-section {
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 8px;
-            border: 1px solid #e2e8f0;
+        .method-option i {
+            font-size: 18px;
         }
-        .payment-for-section label {
+        /* Section Cards */
+        .section-card {
+            background: var(--hannah-light);
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 10px;
+            border: 1px solid #d1e3ff;
+        }
+        .section-card label {
             display: block;
             margin-bottom: 12px;
             font-size: 14px;
-            font-weight: 500;
-            color: #334155;
+            font-weight: 600;
+            color: #2c3e50;
         }
-        .payment-for-options {
+        .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
-        .payment-for-option {
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: white;
-            font-size: 14px;
-        }
-        .payment-for-option:hover {
-            border-color: #3b82f6;
-        }
-        .payment-for-option.active {
-            border-color: #3b82f6;
-            background: #eff6ff;
-        }
-        /* One Time / Recurring */
-        .recurring-section {
-            background: #f8fafc;
+        .option-button {
+            padding: 14px;
+            border: 2px solid #d1e3ff;
             border-radius: 8px;
-            padding: 16px;
-            margin-top: 8px;
-            border: 1px solid #e2e8f0;
-        }
-        .recurring-section label {
-            display: block;
-            margin-bottom: 12px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #334155;
-        }
-        .recurring-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        .recurring-option {
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             background: white;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
-        .recurring-option:hover {
-            border-color: #3b82f6;
+        .option-button:hover {
+            border-color: var(--hannah-primary);
         }
-        .recurring-option.active {
-            border-color: #3b82f6;
-            background: #eff6ff;
+        .option-button.active {
+            border-color: var(--hannah-primary);
+            background: white;
+            color: var(--hannah-primary);
+            box-shadow: 0 2px 8px rgba(44, 90, 160, 0.1);
+        }
+        .option-button i {
+            color: var(--hannah-secondary);
+        }
+        /* Pet Selection */
+        .pet-selection {
+            margin-top: 8px;
+            padding-top: 16px;
+            border-top: 1px solid #e1e8f0;
+        }
+        .pet-selection label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .pet-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e1e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        .pet-select:focus {
+            outline: none;
+            border-color: var(--hannah-primary);
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
         }
         /* Comments */
         .comments-section textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            padding: 14px;
+            border: 2px solid #e1e8f0;
+            border-radius: 8px;
             font-size: 14px;
             background: white;
-            transition: border-color 0.2s;
-            min-height: 80px;
+            transition: all 0.3s ease;
+            min-height: 90px;
             resize: vertical;
         }
         /* PIN Section */
         .pin-section {
-            margin-top: 8px;
+            margin-top: 10px;
         }
         .pin-section input {
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             font-family: monospace;
-            font-size: 18px;
+            font-size: 20px;
             text-align: center;
+            font-weight: 600;
         }
-        /* Modal Footer */
-        .modal-footer {
-            padding: 20px 24px;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            background: #f8fafc;
+        /* Bank Info Section */
+        .bank-info-section {
+            display: none;
         }
-        .btn {
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
+        .bank-info-section .form-row-2 {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 14px;
         }
-        .btn-secondary {
-            background: white;
-            color: #64748b;
-            border: 1px solid #cbd5e1;
-        }
-        .btn-secondary:hover {
-            background: #f1f5f9;
-        }
-        .btn-primary {
-            background: #3b82f6;
-            color: white;
-            border: 1px solid #2563eb;
-        }
-        .btn-primary:hover {
-            background: #2563eb;
+        .routing-account-row {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 14px;
         }
         /* Card Icon */
         .card-icon {
             position: absolute;
-            right: 12px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: #64748b;
-            font-size: 20px;
+            color: var(--hannah-gray);
+            font-size: 22px;
         }
-        .card-input-container {
+        .card-input-container,
+        .bank-input-container {
             position: relative;
         }
-        .card-input-container input {
-            padding-right: 40px;
+        .card-input-container input,
+        .bank-input-container input {
+            padding-right: 50px;
         }
         /* Month/Year Select */
         .month-year-select {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 10px;
+        }
+        /* Modal Footer */
+        .modal-footer {
+            padding: 22px 28px;
+            border-top: 1px solid #e1e8f0;
+            display: flex;
+            justify-content: space-between;
+            background: #f8fafc;
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 120px;
+            justify-content: center;
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--hannah-gray);
+            border: 2px solid #e1e8f0;
+        }
+        .btn-secondary:hover {
+            background: #f8fafc;
+            border-color: var(--hannah-gray);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--hannah-primary) 0%, #3a6fc5 100%);
+            color: white;
+            border: 2px solid var(--hannah-primary);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #24518f 0%, #2c5aa0 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.2);
+        }
+        /* Security Note */
+        .security-note {
+            background: #fff8e6;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: #5c4a00;
+        }
+        .security-note i {
+            color: var(--hannah-accent);
+            font-size: 18px;
+        }
+        /* Responsive */
+        @media (max-width: 576px) {
+            .modal-content {
+                padding: 20px;
+            }
+            .form-row,
+            .form-row-3,
+            .form-row-address {
+                grid-template-columns: 1fr;
+            }
+            .payment-type-tabs {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -295,104 +405,177 @@
     <div class="modal-container">
         <!-- Modal Header -->
         <div class="modal-header">
-            <h1><i class="fas fa-credit-card"></i> Store New Card</h1>
+            <h1><i class="fas fa-lock"></i> Store Payment Method</h1>
+            <div class="payment-type-tabs">
+                <div class="payment-tab active" onclick="selectPaymentType('card')">
+                    <i class="fas fa-credit-card"></i>
+                    Credit/Debit Card
+                </div>
+                <div class="payment-tab" onclick="selectPaymentType('bank')">
+                    <i class="fas fa-university"></i>
+                    Bank Account
+                </div>
+            </div>
         </div>
 
         <!-- Modal Content -->
         <div class="modal-content">
             <div class="form-container">
-                <!-- Method Options -->
-                <div class="form-group">
-                    <label>Card Collection Method</label>
-                    <div class="method-options">
-                        <div class="method-option active" onclick="selectMethod('email')">
-                            Email CC Form
-                        </div>
-                        <div class="method-option" onclick="selectMethod('text')">
-                            Text CC Form
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Credit Card Details -->
-                <div class="form-group">
-                    <label class="required">Credit Card Number</label>
-                    <div class="card-input-container">
-                        <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
-                        <i class="fas fa-credit-card card-icon"></i>
-                    </div>
-                </div>
-
-                <!-- Expiration Date and CVV -->
-                <div class="form-row-3">
+                <!-- Credit Card Section (Default) -->
+                <div id="cardSection">
+                    <!-- Method Options -->
                     <div class="form-group">
-                        <label class="required">Expiration Date</label>
-                        <div class="month-year-select">
-                            <select>
-                                <option value="">Month</option>
-                                <option value="01">01 - January</option>
-                                <option value="02">02 - February</option>
-                                <option value="03">03 - March</option>
-                                <option value="04">04 - April</option>
-                                <option value="05">05 - May</option>
-                                <option value="06">06 - June</option>
-                                <option value="07">07 - July</option>
-                                <option value="08">08 - August</option>
-                                <option value="09">09 - September</option>
-                                <option value="10">10 - October</option>
-                                <option value="11">11 - November</option>
-                                <option value="12">12 - December</option>
-                            </select>
-                            <select>
-                                <option value="">Year</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2027">2027</option>
-                                <option value="2028">2028</option>
-                                <option value="2029">2029</option>
-                            </select>
+                        <label>Collection Method</label>
+                        <div class="method-options">
+                            <div class="method-option active" onclick="selectMethod('email')">
+                                <i class="fas fa-envelope"></i>
+                                Email CC Form
+                            </div>
+                            <div class="method-option" onclick="selectMethod('text')">
+                                <i class="fas fa-mobile-alt"></i>
+                                Text CC Form
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Credit Card Details -->
                     <div class="form-group">
-                        <label class="required">CVV</label>
-                        <input type="text" placeholder="123" maxlength="4">
+                        <label class="required">Credit Card Number</label>
+                        <div class="card-input-container">
+                            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+                            <i class="fas fa-credit-card card-icon"></i>
+                        </div>
+                    </div>
+
+                    <!-- Expiration Date and CVV -->
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label class="required">Expiration Date</label>
+                            <div class="month-year-select">
+                                <select id="cardMonth">
+                                    <option value="">Month</option>
+                                    <option value="01">01 - January</option>
+                                    <option value="02">02 - February</option>
+                                    <option value="03">03 - March</option>
+                                    <option value="04">04 - April</option>
+                                    <option value="05">05 - May</option>
+                                    <option value="06">06 - June</option>
+                                    <option value="07">07 - July</option>
+                                    <option value="08">08 - August</option>
+                                    <option value="09">09 - September</option>
+                                    <option value="10">10 - October</option>
+                                    <option value="11">11 - November</option>
+                                    <option value="12">12 - December</option>
+                                </select>
+                                <select id="cardYear">
+                                    <option value="">Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">CVV</label>
+                            <input type="text" placeholder="123" maxlength="4">
+                            <div class="input-hint"><i class="fas fa-info-circle"></i> 3-4 digits on back of card</div>
+                        </div>
+                    </div>
+
+                    <!-- Billing Address -->
+                    <div class="form-row-address">
+                        <div class="form-group">
+                            <label>Billing Street Address:</label>
+                            <input type="text" placeholder="123 Main Street">
+                        </div>
+                        <div class="form-group">
+                            <label>Zip Code:</label>
+                            <input type="text" placeholder="90210" maxlength="10">
+                        </div>
                     </div>
                 </div>
 
-                <!-- Billing Address -->
-                <div class="form-row-address">
+                <!-- Bank Account Section (Hidden by default) -->
+                <div id="bankSection" class="bank-info-section">
+                    <!-- Bank Details -->
                     <div class="form-group">
-                        <label>Billing Street Address:</label>
-                        <input type="text" placeholder="123 Main Street">
+                        <label class="required">Account Holder Name</label>
+                        <input type="text" placeholder="Francesca Ferrucci">
                     </div>
+
                     <div class="form-group">
-                        <label>Zip:</label>
-                        <input type="text" placeholder="90210" maxlength="10">
+                        <label class="required">Bank Name</label>
+                        <div class="bank-input-container">
+                            <input type="text" placeholder="Bank of America">
+                            <i class="fas fa-university card-icon"></i>
+                        </div>
+                    </div>
+
+                    <!-- Routing and Account Numbers -->
+                    <div class="routing-account-row">
+                        <div class="form-group">
+                            <label class="required">Routing Number</label>
+                            <input type="text" placeholder="123456789" maxlength="9">
+                            <div class="input-hint">9-digit bank code</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Account Number</label>
+                            <input type="text" placeholder="Account number" maxlength="17">
+                            <div class="input-hint">10-17 digits</div>
+                        </div>
+                    </div>
+
+                    <!-- Account Type -->
+                    <div class="form-group">
+                        <label class="required">Account Type</label>
+                        <div class="options-grid">
+                            <div class="option-button active" onclick="selectAccountType('checking')">
+                                <i class="fas fa-money-check-alt"></i>
+                                Checking
+                            </div>
+                            <div class="option-button" onclick="selectAccountType('savings')">
+                                <i class="fas fa-piggy-bank"></i>
+                                Savings
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Common Sections (Shown for both) -->
                 <!-- Payment Method For -->
-                <div class="payment-for-section">
-                    <label>Payment Method For:</label>
-                    <div class="payment-for-options">
-                        <div class="payment-for-option active" onclick="selectPaymentFor('member')">
-                            Francesca Ferrucci
+                <div class="section-card">
+                    <label><i class="fas fa-user-circle"></i> Payment Method For:</label>
+                    <div class="options-grid">
+                        <div class="option-button active" onclick="selectPaymentFor('member')">
+                            <i class="fas fa-user-md"></i>
+                            Member (Francesca)
                         </div>
-                        <div class="payment-for-option" onclick="selectPaymentFor('pet')">
-                            Charlotte "Charlee"
+                        <div class="option-button" onclick="selectPaymentFor('pet')">
+                            <i class="fas fa-paw"></i>
+                            Pet
                         </div>
+                    </div>
+                    
+                    <!-- Pet Selection (Only shows when pet is selected) -->
+                    <div class="pet-selection" id="petSelection" style="display: none;">
+                        <label>Select Pet:</label>
+                        <select class="pet-select" id="petSelect">
+                            <option value="">Select a pet</option>
+                            <option value="charlotte">Charlotte "Charlee"</option>
+                            <option value="carlotta">Carlotta</option>
+                            <option value="teddy">Teddy</option>
+                            <option value="new-puppy">New Puppy</option>
+                        </select>
                     </div>
                 </div>
 
                 <!-- One Time / Recurring -->
-                <div class="recurring-section">
-                    <label>One Time / Recurring:</label>
-                    <div class="recurring-options">
-                        <div class="recurring-option active" onclick="selectRecurring('one-time')">
+                <div class="section-card">
+                    <label><i class="fas fa-calendar-alt"></i> Payment Schedule:</label>
+                    <div class="options-grid">
+                        <div class="option-button active" onclick="selectRecurring('one-time')">
+                            <i class="fas fa-calendar-day"></i>
                             One Time Use
                         </div>
-                        <div class="recurring-option" onclick="selectRecurring('recurring')">
+                        <div class="option-button" onclick="selectRecurring('recurring')">
+                            <i class="fas fa-redo-alt"></i>
                             Recurring
                         </div>
                     </div>
@@ -400,15 +583,24 @@
 
                 <!-- Comments/Detail -->
                 <div class="form-group comments-section">
-                    <label>Comments/Detail:</label>
+                    <label><i class="fas fa-comment-dots"></i> Comments/Detail:</label>
                     <textarea placeholder="Add any notes or details about this payment method..."></textarea>
                 </div>
 
-                <!-- Your Pin -->
+                <!-- Security PIN -->
                 <div class="form-group pin-section">
-                    <label>Your Pin</label>
-                    <input type="password" placeholder="Enter your PIN" maxlength="6">
-                    <div class="input-hint">Enter your 4-6 digit PIN for security verification</div>
+                    <label><i class="fas fa-shield-alt"></i> Security PIN</label>
+                    <input type="password" placeholder="Enter your 4-6 digit PIN" maxlength="6">
+                    <div class="input-hint">Required for verification when using this payment method</div>
+                </div>
+
+                <!-- Security Note -->
+                <div class="security-note">
+                    <i class="fas fa-lock"></i>
+                    <div>
+                        <strong>Security Guarantee:</strong> All payment information is encrypted and stored securely. 
+                        We never store your full PIN on our servers.
+                    </div>
                 </div>
             </div>
         </div>
@@ -416,113 +608,29 @@
         <!-- Modal Footer -->
         <div class="modal-footer">
             <button class="btn btn-secondary" onclick="cancel()">
+                <i class="fas fa-times"></i>
                 Cancel
             </button>
             <button class="btn btn-primary" onclick="submit()">
-                Submit
+                <i class="fas fa-save"></i>
+                Save Payment Method
             </button>
         </div>
     </div>
 
     <script>
-        // Format credit card number
-        document.querySelector('input[placeholder="1234 5678 9012 3456"]').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-            let formatted = '';
-            
-            for (let i = 0; i < value.length; i++) {
-                if (i > 0 && i % 4 === 0) {
-                    formatted += ' ';
-                }
-                formatted += value[i];
-            }
-            
-            e.target.value = formatted.substring(0, 19); // Limit to 16 digits + 3 spaces
-        });
-
-        // Format CVV
-        document.querySelector('input[placeholder="123"]').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/[^0-9]/gi, '');
-            e.target.value = value.substring(0, 4);
-        });
-
-        // Format ZIP
-        document.querySelector('input[placeholder="90210"]').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/[^0-9]/gi, '');
-            e.target.value = value.substring(0, 10);
-        });
-
-        // Format PIN
-        document.querySelector('input[placeholder="Enter your PIN"]').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/[^0-9]/gi, '');
-            e.target.value = value.substring(0, 6);
-        });
-
-        // Select method
-        function selectMethod(method) {
-            const options = document.querySelectorAll('.method-option');
-            options.forEach(opt => opt.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            
-            // Show different instructions based on method
-            if (method === 'text') {
-                alert('A secure text message will be sent to collect card details.');
-            }
-        }
-
-        // Select payment for
-        function selectPaymentFor(option) {
-            const options = document.querySelectorAll('.payment-for-option');
-            options.forEach(opt => opt.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-
-        // Select recurring option
-        function selectRecurring(option) {
-            const options = document.querySelectorAll('.recurring-option');
-            options.forEach(opt => opt.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-
-        // Cancel
-        function cancel() {
-            if (confirm('Are you sure you want to cancel? Any entered information will be lost.')) {
-                alert('Card storage cancelled.');
-            }
-        }
-
-        // Submit
-        function submit() {
-            const cardNumber = document.querySelector('input[placeholder="1234 5678 9012 3456"]').value;
-            const method = document.querySelector('.method-option.active').textContent;
-            const paymentFor = document.querySelector('.payment-for-option.active').textContent;
-            const recurring = document.querySelector('.recurring-option.active').textContent;
-            
-            if (!cardNumber || cardNumber.replace(/\s/g, '').length < 15) {
-                alert('Please enter a valid credit card number.');
-                return;
-            }
-            
-            const pin = document.querySelector('input[placeholder="Enter your PIN"]').value;
-            if (!pin || pin.length < 4) {
-                alert('Please enter a valid 4-6 digit PIN.');
-                return;
-            }
-            
-            alert(`✅ Payment Method Stored Successfully!\n\n` +
-                  `Method: ${method}\n` +
-                  `For: ${paymentFor}\n` +
-                  `Type: ${recurring}\n\n` +
-                  `Card ending in: ${cardNumber.slice(-4)}\n` +
-                  `This payment method has been securely stored.`);
-        }
-
-        // Set current year and next 5 years in year dropdown
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            const yearSelect = document.querySelectorAll('select')[1];
+            populateYearDropdown();
+            setupInputFormatting();
+        });
+
+        // Populate year dropdown
+        function populateYearDropdown() {
+            const yearSelect = document.getElementById('cardYear');
             const currentYear = new Date().getFullYear();
             
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 8; i++) {
                 const option = document.createElement('option');
                 option.value = currentYear + i;
                 option.textContent = currentYear + i;
@@ -531,10 +639,170 @@
             }
             
             // Set current month as default
-            const monthSelect = document.querySelectorAll('select')[0];
+            const monthSelect = document.getElementById('cardMonth');
             const currentMonth = new Date().getMonth() + 1;
             monthSelect.value = currentMonth.toString().padStart(2, '0');
-        });
+        }
+
+        // Setup input formatting
+        function setupInputFormatting() {
+            // Format credit card number
+            const cardInput = document.querySelector('input[placeholder="1234 5678 9012 3456"]');
+            if (cardInput) {
+                cardInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                    let formatted = '';
+                    
+                    for (let i = 0; i < value.length; i++) {
+                        if (i > 0 && i % 4 === 0) {
+                            formatted += ' ';
+                        }
+                        formatted += value[i];
+                    }
+                    
+                    e.target.value = formatted.substring(0, 19);
+                });
+            }
+
+            // Format routing number
+            const routingInput = document.querySelector('input[placeholder="123456789"]');
+            if (routingInput) {
+                routingInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/[^0-9]/gi, '');
+                    e.target.value = value.substring(0, 9);
+                });
+            }
+
+            // Format account number
+            const accountInput = document.querySelector('input[placeholder="Account number"]');
+            if (accountInput) {
+                accountInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/[^0-9]/gi, '');
+                    e.target.value = value.substring(0, 17);
+                });
+            }
+
+            // Format PIN
+            const pinInput = document.querySelector('input[placeholder="Enter your 4-6 digit PIN"]');
+            if (pinInput) {
+                pinInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/[^0-9]/gi, '');
+                    e.target.value = value.substring(0, 6);
+                });
+            }
+        }
+
+        // Select payment type (Card or Bank)
+        function selectPaymentType(type) {
+            const tabs = document.querySelectorAll('.payment-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            const cardSection = document.getElementById('cardSection');
+            const bankSection = document.getElementById('bankSection');
+            
+            if (type === 'card') {
+                cardSection.style.display = 'block';
+                bankSection.style.display = 'none';
+            } else {
+                cardSection.style.display = 'none';
+                bankSection.style.display = 'block';
+            }
+        }
+
+        // Select method
+        function selectMethod(method) {
+            const options = document.querySelectorAll('.method-option');
+            options.forEach(opt => opt.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // Select payment for
+        function selectPaymentFor(option) {
+            const options = document.querySelectorAll('.option-button');
+            options.forEach(opt => {
+                if (opt.textContent.includes('Member') || opt.textContent.includes('Pet')) {
+                    opt.classList.remove('active');
+                }
+            });
+            event.currentTarget.classList.add('active');
+            
+            const petSelection = document.getElementById('petSelection');
+            if (option === 'pet') {
+                petSelection.style.display = 'block';
+            } else {
+                petSelection.style.display = 'none';
+            }
+        }
+
+        // Select recurring option
+        function selectRecurring(option) {
+            const options = document.querySelectorAll('.option-button');
+            options.forEach(opt => {
+                if (opt.textContent.includes('One Time') || opt.textContent.includes('Recurring')) {
+                    opt.classList.remove('active');
+                }
+            });
+            event.currentTarget.classList.add('active');
+        }
+
+        // Select account type
+        function selectAccountType(type) {
+            const options = document.querySelectorAll('.option-button');
+            options.forEach(opt => {
+                if (opt.textContent.includes('Checking') || opt.textContent.includes('Savings')) {
+                    opt.classList.remove('active');
+                }
+            });
+            event.currentTarget.classList.add('active');
+        }
+
+        // Cancel
+        function cancel() {
+            if (confirm('Are you sure you want to cancel? Any entered information will be lost.')) {
+                alert('Payment method storage cancelled.');
+            }
+        }
+
+        // Submit
+        function submit() {
+            const isCard = document.querySelector('.payment-tab.active').textContent.includes('Card');
+            const method = document.querySelector('.method-option.active')?.textContent || 'Bank Account';
+            const paymentFor = document.querySelector('.option-button.active').textContent;
+            const recurring = document.querySelectorAll('.option-button')[2]?.classList.contains('active') ? 'Recurring' : 'One Time Use';
+            
+            let paymentDetails = '';
+            
+            if (isCard) {
+                const cardNumber = document.querySelector('input[placeholder="1234 5678 9012 3456"]').value;
+                if (!cardNumber || cardNumber.replace(/\s/g, '').length < 15) {
+                    alert('Please enter a valid credit card number.');
+                    return;
+                }
+                paymentDetails = `Card ending in: ${cardNumber.slice(-4)}`;
+            } else {
+                const accountNumber = document.querySelector('input[placeholder="Account number"]').value;
+                if (!accountNumber || accountNumber.length < 4) {
+                    alert('Please enter a valid bank account number.');
+                    return;
+                }
+                paymentDetails = `Account ending in: ${accountNumber.slice(-4)}`;
+            }
+            
+            const pin = document.querySelector('input[placeholder="Enter your 4-6 digit PIN"]').value;
+            if (!pin || pin.length < 4) {
+                alert('Please enter a valid 4-6 digit PIN.');
+                return;
+            }
+            
+            alert(`✅ Payment Method Stored Successfully!\n\n` +
+                  `Type: ${isCard ? 'Credit/Debit Card' : 'Bank Account'}\n` +
+                  `Method: ${method}\n` +
+                  `For: ${paymentFor}\n` +
+                  `Schedule: ${recurring}\n` +
+                  `${paymentDetails}\n\n` +
+                  `This payment method has been securely stored and encrypted.`);
+        }
     </script>
 </body>
 </html>
